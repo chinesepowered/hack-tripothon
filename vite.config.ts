@@ -48,8 +48,19 @@ function devApi(): Plugin {
   }
 }
 
+// Social previews need an absolute og:image; Vercel provides the production host at build time.
+function absoluteOgImage(): Plugin {
+  const host = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL
+  return {
+    name: 'absolute-og-image',
+    transformIndexHtml(html) {
+      return host ? html.replaceAll('content="/og.png"', `content="https://${host}/og.png"`) : html
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), devApi()],
+  plugins: [react(), devApi(), absoluteOgImage()],
   server: { host: true, port: 5173 },
   build: {
     chunkSizeWarningLimit: 2000,
