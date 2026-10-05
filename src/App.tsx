@@ -4,6 +4,8 @@ import { Landing } from './pages/Landing'
 import { Create } from './pages/Create'
 import { GiftView } from './pages/GiftView'
 import { Board } from './pages/Board'
+import { View } from './pages/View'
+import { Og } from './pages/Og'
 
 // Strip the "?query" part of the hash so routes match; pages read it via hashQuery().
 function useHashPath(): [string, (to: string) => void] {
@@ -18,6 +20,8 @@ export function App() {
         <Route path="/create" component={Create} />
         <Route path="/g/:data">{(p) => <GiftView key={p.data} data={p.data} />}</Route>
         <Route path="/board/:id?">{(p) => <Board id={p.id} />}</Route>
+        <Route path="/og" component={Og} />
+        <Route path="/view/:i">{(p) => <View index={Number(p.i) || 0} />}</Route>
         <Route component={Landing} />
       </Switch>
     </Router>

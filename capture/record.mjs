@@ -189,7 +189,7 @@ await segment(
         <div style="text-align:center;font-family:Fredoka,sans-serif;color:#4a3426">
           <div style="font-size:30px;font-weight:600;display:flex;gap:12px;align-items:center;justify-content:center"><span style="display:inline-grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#ffd45c">📮</span> Capy Post</div>
           <div style="font-size:64px;font-weight:600;margin:14px 0 8px">Send someone a tiny world.</div>
-          <div style="font:700 22px Nunito,sans-serif;color:#8a6a55">Characters &amp; objects generated, rigged and animated with Tripo · #Tripothon</div>
+          <div style="font:700 22px Nunito,sans-serif;color:#8a6a55">Every capybara &amp; gift generated, rigged and animated with Tripo · #Tripothon</div>
         </div>
       </div>`,
       'endcard',

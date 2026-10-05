@@ -1,12 +1,12 @@
 import { useRef, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { View, PerspectiveCamera, Environment, Lightformer, ContactShadows } from '@react-three/drei'
+import { PerspectiveCamera, Environment, Lightformer, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
 import { GLBModel } from '../three/GLBModel'
 import { useAsset, useManifestReady, allAssets } from '../lib/assets'
 
 const CHARACTERS: [string, string][] = [
-  ['host', 'Host capybara · biped auto-rig · greet / dance / cheer'],
+  ['host', 'Host capybara · biped auto-rig · 5 batched presets (greet, dance, walk, relax, cheer)'],
   ['capy', 'Soaking capybara · text-to-3D'],
   ['capy4', 'Walking capybara · quadruped auto-rig · walk cycle'],
   ['cat', 'Mochi the cat · quadruped auto-rig · walk cycle'],
@@ -58,27 +58,32 @@ function Single({ id }: { id: string }) {
 
 export function Board({ id }: { id?: string }) {
   const ready = useManifestReady()
-  const container = useRef<HTMLDivElement>(null!)
   if (id) return <Single id={id} />
   const assets = allAssets()
   const card = (aid: string, caption: string) =>
     assets[aid] ? (
       <div className="board-card" key={aid}>
-        <View className="board-view">
-          <Turntable id={aid} />
-        </View>
+        <img className="board-hero" src={`/board/${aid}-35.png`} alt={aid} />
+        <div className="board-turns">
+          {[0, 90, 180].map((a) => (
+            <img key={a} src={`/board/${aid}-${a}.png`} alt={`${aid} ${a}°`} />
+          ))}
+        </div>
         <b>{aid}</b>
         <small>{caption}</small>
         <code>“{assets[aid].prompt}”</code>
       </div>
     ) : null
   return (
-    <div className="board" ref={container}>
+    <div className="board">
       <header>
         <div className="brand">
           <span className="stamp">📮</span> Capy Post — visual asset board
         </div>
-        <p>Every character and gift object below was generated with the Tripo API (text-to-3D), and the animals were auto-rigged and animated with Tripo's rig + retarget endpoints.</p>
+        <p>
+          Every character and gift object below was generated with the Tripo API (text-to-3D); the animals were auto-rigged and animated with Tripo's rig +
+          retarget endpoints. Turnarounds: 3/4 view, then front · side · back.
+        </p>
       </header>
       {ready && (
         <>
@@ -86,20 +91,17 @@ export function Board({ id }: { id?: string }) {
           <div className="board-grid four">{CHARACTERS.map(([aid, c]) => card(aid, c))}</div>
           <h3>Gift objects · Tripo text-to-3D</h3>
           <div className="board-grid four">{OBJECTS.map((aid) => card(aid, 'Library gift · text-to-3D, standard texture'))}</div>
-          <h3>Worlds</h3>
+          <h3>Worlds · procedural island + Tripo cast</h3>
           <div className="board-grid three">
             {WORLDS.map(([w, name]) => (
               <div className="board-card world" key={w}>
-                <img src={`/board/world-${w}.jpg`} alt={name} onError={(e) => ((e.target as HTMLImageElement).style.visibility = 'hidden')} />
+                <img src={`/board/world-${w}.jpg`} alt={name} />
                 <b>{name}</b>
               </div>
             ))}
           </div>
         </>
       )}
-      <Canvas eventSource={container} className="board-canvas" flat gl={{ preserveDrawingBuffer: true }}>
-        <View.Port />
-      </Canvas>
     </div>
   )
 }

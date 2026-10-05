@@ -48,7 +48,7 @@ const music = path.join(ROOT, 'public/audio/music.mp3')
 const inputs = ['-i', path.join(tmp, 'narration.wav'), '-stream_loop', '-1', '-i', music, ...sfxFiles.flatMap((f) => ['-i', f])]
 const fadeOut = Math.max(0, D - 3).toFixed(2)
 let graph =
-  `[1:a]aresample=44100,volume=0.30,afade=t=in:st=0:d=1.2,afade=t=out:st=${fadeOut}:d=3,atrim=0:${D.toFixed(3)}[m];` +
+  `[1:a]aresample=44100,volume=${process.env.MUSIC_VOL || 0.3},afade=t=in:st=0:d=1.2,afade=t=out:st=${fadeOut}:d=3,atrim=0:${D.toFixed(3)}[m];` +
   `[0:a]asplit=2[v][sc];` +
   `[m][sc]sidechaincompress=threshold=0.035:ratio=6:attack=40:release=500[duck];`
 const sfxLabels = sfxFiles.map((_, i) => `[${i + 2}:a]`).join('')
@@ -60,7 +60,7 @@ ff([
   '-framerate', String(timeline.fps),
   '-i', path.join(framesDir, 'f%05d.jpg'),
   '-i', path.join(tmp, 'mix.wav'),
-  '-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-pix_fmt', 'yuv420p', '-tune', 'animation',
+  '-c:v', 'libx264', '-preset', 'slow', '-crf', process.env.CRF || '20', '-pix_fmt', 'yuv420p', '-tune', 'animation',
   '-c:a', 'aac', '-b:a', '192k',
   '-movflags', '+faststart',
   '-shortest',

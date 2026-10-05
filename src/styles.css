@@ -648,10 +648,24 @@ textarea {
   font-family: 'Nunito', sans-serif;
   font-style: italic;
 }
-.board-view {
-  height: 220px;
+.board-hero {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
   border-radius: 12px;
-  background: linear-gradient(180deg, #fff1e6, #ffe2d4);
+}
+.board-turns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 6px 0 4px;
+}
+.board-turns img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #fff4e6;
 }
 .board-card.world img {
   width: 100%;
@@ -668,6 +682,24 @@ textarea {
   position: fixed;
   inset: 0;
   background: #fff4e6;
+}
+
+.og-title {
+  position: absolute;
+  left: 56px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+.og-title h1 {
+  font-size: 64px;
+  margin: 14px 0 10px;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+.og-title p {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink-soft);
 }
 
 /* ---------- motion ---------- */
@@ -720,6 +752,9 @@ textarea {
 
 /* ---------- small screens ---------- */
 @media (max-width: 760px) {
+  .made {
+    display: none;
+  }
   .landing .hero {
     top: auto;
     bottom: 44px;

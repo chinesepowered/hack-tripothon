@@ -31,7 +31,7 @@
     "capy4": {
       "url": "/assets/capy4.glb",
       "height": 0.8,
-      "yaw": -1.5707963267948966,
+      "yaw": 0,
       "clip": "preset:quadruped:walk",
       "rigged": true,
       "prompt": "a capybara walking on all four legs, long horizontal barrel shaped body low to the ground, four short sturdy legs, side profile, blunt square snout, tiny round ears, soft warm brown fur, calm content face",

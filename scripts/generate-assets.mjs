@@ -49,6 +49,8 @@ const SPECS = [
     anims: ['preset:quadruped:walk'],
     style: QUAD_STYLE,
     neg: QUAD_NEG,
+    // Tripo orients models by their reference image; "side profile" put this one's head along -X
+    yaw: 0,
     prompt:
       'a capybara walking on all four legs, long horizontal barrel shaped body low to the ground, four short sturdy legs, side profile, blunt square snout, tiny round ears, soft warm brown fur, calm content face',
   },
@@ -221,7 +223,7 @@ async function generate(spec) {
   manifest.assets[spec.id] = {
     url: `/assets/${spec.id}.glb`,
     height: spec.height,
-    yaw: -Math.PI / 2,
+    yaw: spec.yaw ?? -Math.PI / 2,
     clip: rigged ? clip : undefined,
     rigged,
     prompt: spec.prompt,

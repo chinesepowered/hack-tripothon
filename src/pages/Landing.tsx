@@ -41,7 +41,7 @@ export function Landing() {
         </div>
       </div>
       <footer className="made">
-        Every model is generated &amp; auto-rigged with <b>Tripo</b> · tap the capybaras · #Tripothon
+        Capybaras &amp; gifts generated, rigged and animated with <b>Tripo</b> · tap the capybaras · #Tripothon
       </footer>
       <MuteButton />
     </div>

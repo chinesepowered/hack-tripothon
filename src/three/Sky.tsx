@@ -65,7 +65,7 @@ export function Atmosphere({ theme }: { theme: ThemeId }) {
       {theme === 'moon' ? (
         <>
           <Stars radius={50} depth={20} count={2500} factor={3} saturation={0.4} fade speed={0.6} />
-          <Earth position={[-9, 7.5, -16]} scale={2.4} />
+          <Earth position={[-7.5, 4.2, -15]} scale={2.4} />
         </>
       ) : (
         <Clouds count={12} radius={21} y={-4.5} color={theme === 'kid' ? '#ffffff' : '#fff1ea'} />

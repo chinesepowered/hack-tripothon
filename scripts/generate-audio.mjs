@@ -44,7 +44,7 @@ export const NARRATION = [
   },
   {
     id: 'outro',
-    text: "There are worlds for the moon's dark side, and for the kid you used to be. Every character and object you've seen was generated, rigged, and animated with Tripo. Capy Post. Send someone a tiny world.",
+    text: "There are worlds for the moon's dark side, and for the kid you used to be. Every capybara and every gift here was made with Tripo: generated, rigged, and animated. Capy Post. Send someone a tiny world.",
   },
 ]
 

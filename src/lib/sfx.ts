@@ -137,8 +137,11 @@ export function setMuted(m: boolean) {
 }
 export const isMuted = () => muted
 
+const ALL: SfxName[] = ['pop', 'squeak', 'chime', 'whoosh', 'splash', 'paper', 'sparkle', 'thud', 'ribbon']
+
 export function startMusic() {
   if (window.__capture || music) return
+  ALL.forEach((n) => loadBuffer(n))
   const a = new Audio('/audio/music.mp3')
   a.loop = true
   a.volume = 0.35

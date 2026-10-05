@@ -306,9 +306,11 @@ function CameraRig({ mode, openAt, shift }: { mode: WorldMode; openAt: React.Mut
   }, [camera, size.width, size.height, shift?.[0], shift?.[1]])
   const controls = useRef<any>(null)
   const [explore, setExplore] = useState(mode !== 'gift')
-  const fit = size.width / size.height < 0.8 ? 1.75 : size.width / size.height < 1.3 ? 1.25 : 1
+  const portrait = size.width / size.height < 0.8
+  const fit = portrait ? 1.75 : size.width / size.height < 1.3 ? 1.25 : 1
   const target = useMemo(() => new THREE.Vector3(0.3, 0.35, 0.2), [])
-  const boxPos = useMemo(() => new THREE.Vector3(0, 3.4 * (fit > 1 ? 1.1 : 1), 10.2 * fit), [fit])
+  // the gift box should fill a phone screen, so it gets a tighter framing than the island
+  const boxPos = useMemo(() => new THREE.Vector3(0, 3.4 * (fit > 1 ? 1.1 : 1), 10.2 * (portrait ? 1.32 : fit)), [fit, portrait])
   const boxLook = useMemo(() => new THREE.Vector3(0, 1.05, 0), [])
   const widePos = useMemo(() => new THREE.Vector3(0.9, 6.4, 13.8).multiplyScalar(fit), [fit])
   const look = useMemo(() => new THREE.Vector3(), [])
