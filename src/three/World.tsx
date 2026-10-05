@@ -230,7 +230,7 @@ function ItemSpot({
         {popping && <Sparkles count={24} scale={[1.6, 1.6, 1.6]} position={[0, 0.9, 0]} size={4} speed={0.6} color="#fff2a8" />}
       </PopIn>
       {showLabel && (
-        <Html position={[0, walks ? 1.25 : 1.75, 0]} center distanceFactor={11} zIndexRange={[10, 0]}>
+        <Html position={[0, walks ? 1.3 : [1.95, 1.6, 1.75][index] ?? 1.75, 0]} center distanceFactor={9.5} zIndexRange={[10, 0]}>
           <button className={`item-label ${state}`} onClick={onTap}>
             {state === 'pending' ? '✨ ' : ''}
             {item.label}

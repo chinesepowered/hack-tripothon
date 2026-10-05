@@ -14,33 +14,43 @@ const out = path.join(dir, 'fixed')
 await fs.rm(out, { recursive: true, force: true })
 await fs.mkdir(out)
 const files = (await fs.readdir(dir)).filter((f) => /^f\d{5}\.jpg$/.test(f)).sort()
-const meta = await sharp(path.join(dir, files[0])).metadata()
-const W = meta.width
-const H = meta.height
-const sw = Math.round(W * 0.1)
-const sh = Math.round(H * 0.055)
 
-async function mean(file, top) {
-  // note: sharp's stats() reads the whole input, so average the extracted raw pixels ourselves
-  const { data, info } = await sharp(file).extract({ left: W - sw, top, width: sw, height: sh }).raw().toBuffer({ resolveWithObject: true })
-  const sum = [0, 0, 0]
-  for (let i = 0; i < data.length; i += info.channels) {
-    sum[0] += data[i]
-    sum[1] += data[i + 1]
-    sum[2] += data[i + 2]
+// pass 1: classify. A frame is bad if any tile of a 12x6 grid is a flat patch of the page
+// background (the canvas, or part of it, wasn't composited), with or without the letter's dim overlay.
+const BG = [
+  [247, 198, 183],
+  [216, 172, 157],
+]
+async function isBlank(file) {
+  const GW = 96
+  const GH = 54
+  const { data } = await sharp(file).resize(GW, GH, { fit: 'fill' }).removeAlpha().raw().toBuffer({ resolveWithObject: true })
+  const TW = 8
+  const TH = 9
+  for (let ty = 0; ty < GH / TH; ty++) {
+    for (let tx = 0; tx < GW / TW; tx++) {
+      let n = 0
+      const sum = [0, 0, 0]
+      const sq = [0, 0, 0]
+      for (let y = ty * TH; y < (ty + 1) * TH; y++) {
+        for (let x = tx * TW; x < (tx + 1) * TW; x++) {
+          const i = (y * GW + x) * 3
+          for (let c = 0; c < 3; c++) {
+            sum[c] += data[i + c]
+            sq[c] += data[i + c] * data[i + c]
+          }
+          n++
+        }
+      }
+      const mean = sum.map((v) => v / n)
+      const std = Math.max(...sq.map((v, c) => Math.sqrt(Math.max(0, v / n - mean[c] * mean[c]))))
+      if (std < 1.6 && BG.some((b) => Math.abs(b[0] - mean[0]) + Math.abs(b[1] - mean[1]) + Math.abs(b[2] - mean[2]) < 12)) return true
+    }
   }
-  const n = data.length / info.channels
-  return sum.map((v) => v / n)
+  return false
 }
-
-// pass 1: classify
 const blank = []
-for (const f of files) {
-  const p = path.join(dir, f)
-  const a = await mean(p, 0)
-  const b = await mean(p, H - sh)
-  blank.push(Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) < 10)
-}
+for (const f of files) blank.push(await isBlank(path.join(dir, f)))
 // pass 2: good frames are hard-linked; blank frames become a blend of their nearest good
 // neighbours (keeps motion smooth), or a copy of the previous good frame for long gaps
 let replaced = 0

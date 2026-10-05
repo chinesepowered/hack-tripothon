@@ -396,6 +396,9 @@ p {
   border: 0;
   cursor: pointer;
   white-space: nowrap;
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 7px 13px;
   border-radius: 999px;
   background: rgba(255, 250, 244, 0.92);
