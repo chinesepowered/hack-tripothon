@@ -55,10 +55,11 @@ const sfxLabels = sfxFiles.map((_, i) => `[${i + 2}:a]`).join('')
 graph += `[v]volume=1.25[vv];[vv][duck]${sfxLabels}amix=inputs=${2 + sfxFiles.length}:normalize=0:dropout_transition=0,alimiter=limit=0.95[a]`
 ff([...inputs, '-filter_complex', graph, '-map', '[a]', '-t', D.toFixed(3), '-c:a', 'pcm_s16le', path.join(tmp, 'mix.wav')])
 
-// 4. video + audio
+// 4. video + audio (prefer the deflickered frames when present)
+const frameSrc = (await fs.stat(path.join(framesDir, 'fixed')).catch(() => null)) ? path.join(framesDir, 'fixed') : framesDir
 ff([
   '-framerate', String(timeline.fps),
-  '-i', path.join(framesDir, 'f%05d.jpg'),
+  '-i', path.join(frameSrc, 'f%05d.jpg'),
   '-i', path.join(tmp, 'mix.wav'),
   '-c:v', 'libx264', '-preset', 'slow', '-crf', process.env.CRF || '20', '-pix_fmt', 'yuv420p', '-tune', 'animation',
   '-c:a', 'aac', '-b:a', '192k',

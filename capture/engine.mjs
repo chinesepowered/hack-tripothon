@@ -129,6 +129,8 @@ export async function createCapture({ width = 1920, height = 1080, fps = 30, out
     for (let i = 0; i < n; i++) {
       const step = Math.round((frameNo + 1) * msPerFrame) - Math.round(frameNo * msPerFrame)
       await tick(step)
+      // let the compositor present the freshly drawn WebGL frame before grabbing it
+      await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
       const { data } = await cdp.send('Page.captureScreenshot', { format: 'jpeg', quality: 92 })
       await fs.writeFile(`${outDir}/f${String(frameNo).padStart(5, '0')}.jpg`, Buffer.from(data, 'base64'))
       frameNo++
