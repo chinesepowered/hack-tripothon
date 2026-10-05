@@ -1,0 +1,116 @@
+{
+  "assets": {
+    "capy": {
+      "url": "/assets/capy.glb",
+      "height": 1,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a cute chubby capybara, calm content sleepy face, small round ears, blunt square snout, soft warm brown fur",
+      "task": "c255a461-b255-4ec6-ab6d-6c5821a067bf",
+      "model": "v3.1-20260211"
+    },
+    "host": {
+      "url": "/assets/host.glb",
+      "height": 1.25,
+      "yaw": -1.5707963267948966,
+      "clip": "preset:biped:greet_01",
+      "rigged": true,
+      "prompt": "a cute chubby capybara, calm content sleepy face, small round ears, blunt square snout, soft warm brown fur",
+      "task": "c255a461-b255-4ec6-ab6d-6c5821a067bf",
+      "model": "v3.1-20260211"
+    },
+    "trophy": {
+      "url": "/assets/trophy.glb",
+      "height": 1,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a small shiny golden trophy cup with two handles and a star on top",
+      "task": "867a261f-0141-476e-a52f-df8710c3afff",
+      "model": "v3.1-20260211"
+    },
+    "capy4": {
+      "url": "/assets/capy4.glb",
+      "height": 0.8,
+      "yaw": -1.5707963267948966,
+      "clip": "preset:quadruped:walk",
+      "rigged": true,
+      "prompt": "a capybara walking on all four legs, long horizontal barrel shaped body low to the ground, four short sturdy legs, side profile, blunt square snout, tiny round ears, soft warm brown fur, calm content face",
+      "task": "082579d9-cfcc-4ebb-af1c-b9d90fa98370",
+      "model": "v3.1-20260211"
+    },
+    "coffee": {
+      "url": "/assets/coffee.glb",
+      "height": 0.95,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a giant cute coffee mug with a latte art heart on top, cream colored mug with a pastel stripe",
+      "task": "6e00c0dc-61d9-4c37-aca8-194bfbe76a82",
+      "model": "v3.1-20260211"
+    },
+    "pillow": {
+      "url": "/assets/pillow.glb",
+      "height": 0.7,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a fluffy soft pastel pink square pillow with a cute sleepy smiling face",
+      "task": "46481c8b-737b-4874-8c02-e6536b34a7f2",
+      "model": "v3.1-20260211"
+    },
+    "cake": {
+      "url": "/assets/cake.glb",
+      "height": 0.9,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a cute round birthday cake with pink frosting, strawberries and three candles",
+      "task": "9f520820-c2b5-4cd3-a750-6b15d42ada6d",
+      "model": "v3.1-20260211"
+    },
+    "cat": {
+      "url": "/assets/cat.glb",
+      "height": 0.7,
+      "yaw": -1.5707963267948966,
+      "clip": "preset:quadruped:walk",
+      "rigged": true,
+      "prompt": "a cute chubby orange tabby cat walking on all four legs, horizontal body, legs straight and slightly apart, round face, tail up",
+      "task": "3ae21a86-c64e-448f-b15c-32859cff37fe",
+      "model": "v3.1-20260211"
+    },
+    "telescope": {
+      "url": "/assets/telescope.glb",
+      "height": 1.2,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a cute small brass telescope on a short wooden tripod",
+      "task": "062dd0d9-c3fb-4044-90de-04350b96afd8",
+      "model": "v3.1-20260211"
+    },
+    "rocket": {
+      "url": "/assets/rocket.glb",
+      "height": 1.3,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a cute chubby red and white toy rocket with a round blue window and three fins",
+      "task": "e50fa676-d983-4b29-ac97-dd331d2bbd1b",
+      "model": "v3.1-20260211"
+    },
+    "teddy": {
+      "url": "/assets/teddy.glb",
+      "height": 0.9,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a cute brown teddy bear sitting down, wearing a red bow tie",
+      "task": "4bbec462-6d71-4ebb-8ac6-c5ddbdb42f3f",
+      "model": "v3.1-20260211"
+    },
+    "books": {
+      "url": "/assets/books.glb",
+      "height": 0.8,
+      "yaw": -1.5707963267948966,
+      "rigged": false,
+      "prompt": "a small stack of three colorful hardcover books with a shiny red apple on top",
+      "task": "63977aaa-6e51-400c-9c47-ce12f57b1201",
+      "model": "v3.1-20260211"
+    }
+  },
+  "generatedAt": "2026-10-05T07:20:48.206Z"
+}

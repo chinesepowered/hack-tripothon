@@ -1,0 +1,91 @@
+{
+  "capy_quadwalk_experiment": {
+    "gen": "c255a461-b255-4ec6-ab6d-6c5821a067bf",
+    "gen_credits": 20,
+    "rigcheck": "3ec6d364-b207-4383-8bfb-e9729bb2a288",
+    "rigcheck_credits": 0,
+    "rig": "d4248eb7-4a9a-4a8a-a00c-2065fb9e2f99",
+    "rig_credits": 25,
+    "anim": "76a46fef-8000-4bf4-9ced-029f7e674a0c",
+    "anim_credits": 10,
+    "done": true
+  },
+  "coffee": {
+    "gen": "6e00c0dc-61d9-4c37-aca8-194bfbe76a82",
+    "gen_credits": 20,
+    "done": true
+  },
+  "capy4": {
+    "gen": "082579d9-cfcc-4ebb-af1c-b9d90fa98370",
+    "gen_credits": 20,
+    "rigcheck": "adf09445-1bf7-42f8-89a8-3ce3d6fdd175",
+    "rigcheck_credits": 0,
+    "rig": "623534ae-17f8-4de4-81e6-de50786f99e8",
+    "rig_credits": 25,
+    "anim": "d06622d6-d90f-4733-8e3b-a328917f50b6",
+    "anim_credits": 10,
+    "done": true
+  },
+  "capy": {
+    "gen": "c255a461-b255-4ec6-ab6d-6c5821a067bf",
+    "gen_credits": 20,
+    "done": true
+  },
+  "trophy": {
+    "gen": "867a261f-0141-476e-a52f-df8710c3afff",
+    "gen_credits": 20,
+    "done": true
+  },
+  "host": {
+    "gen": "c255a461-b255-4ec6-ab6d-6c5821a067bf",
+    "gen_credits": 20,
+    "rigcheck": "dcf9e271-d564-4353-8705-ebc8c411c827",
+    "rigcheck_credits": 0,
+    "rig": "6fcf4b4a-28c7-4884-803f-2bf646da1cdb",
+    "rig_credits": 25,
+    "anim": "023889cc-2af0-476c-bed4-37d8f1eaeaf1",
+    "anim_credits": 50,
+    "done": true
+  },
+  "pillow": {
+    "gen": "46481c8b-737b-4874-8c02-e6536b34a7f2",
+    "gen_credits": 20,
+    "done": true
+  },
+  "cake": {
+    "gen": "9f520820-c2b5-4cd3-a750-6b15d42ada6d",
+    "gen_credits": 20,
+    "done": true
+  },
+  "cat": {
+    "gen": "3ae21a86-c64e-448f-b15c-32859cff37fe",
+    "gen_credits": 20,
+    "rigcheck": "10aeabef-0d87-4aba-bf37-cfb87a6ed0db",
+    "rigcheck_credits": 0,
+    "rig": "9a6dde1b-f5f6-45be-9fb2-e73010e54b9f",
+    "rig_credits": 25,
+    "anim": "fe636362-e5e0-445c-971c-445f777f6296",
+    "anim_credits": 10,
+    "done": true
+  },
+  "telescope": {
+    "gen": "062dd0d9-c3fb-4044-90de-04350b96afd8",
+    "gen_credits": 20,
+    "done": true
+  },
+  "rocket": {
+    "gen": "e50fa676-d983-4b29-ac97-dd331d2bbd1b",
+    "gen_credits": 20,
+    "done": true
+  },
+  "books": {
+    "gen": "63977aaa-6e51-400c-9c47-ce12f57b1201",
+    "gen_credits": 20,
+    "done": true
+  },
+  "teddy": {
+    "gen": "4bbec462-6d71-4ebb-8ac6-c5ddbdb42f3f",
+    "gen_credits": 20,
+    "done": true
+  }
+}
