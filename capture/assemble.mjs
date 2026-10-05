@@ -52,7 +52,7 @@ let graph =
   `[0:a]asplit=2[v][sc];` +
   `[m][sc]sidechaincompress=threshold=0.035:ratio=6:attack=40:release=500[duck];`
 const sfxLabels = sfxFiles.map((_, i) => `[${i + 2}:a]`).join('')
-graph += `[v]volume=1.25[vv];[vv][duck]${sfxLabels}amix=inputs=${2 + sfxFiles.length}:normalize=0:dropout_transition=0,alimiter=limit=0.95[a]`
+graph += `[v]volume=1.25[vv];[vv][duck]${sfxLabels}amix=inputs=${2 + sfxFiles.length}:normalize=0:dropout_transition=0,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100[a]`
 ff([...inputs, '-filter_complex', graph, '-map', '[a]', '-t', D.toFixed(3), '-c:a', 'pcm_s16le', path.join(tmp, 'mix.wav')])
 
 // 4. video + audio (prefer the deflickered frames when present)
