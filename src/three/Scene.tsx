@@ -25,7 +25,7 @@ export function Scene({ children, className }: { children: ReactNode; className?
         shadows
         flat
         frameloop={CAPTURE ? 'never' : 'always'}
-        dpr={CAPTURE ? 1 : [1, 2]}
+        dpr={CAPTURE ? 1 : [1, 1.5]}
         camera={{ fov: 36, near: 0.1, far: 300, position: [0.9, 6.4, 13.8] }}
         gl={{ antialias: false, preserveDrawingBuffer: CAPTURE, powerPreference: 'high-performance' }}
       >
