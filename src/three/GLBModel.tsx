@@ -62,6 +62,7 @@ function GLBInner({ url, height = 1, yaw = 0, animate = true, clip, speed = 1, o
 
   useEffect(() => {
     onReady?.(object)
+    ;(window as any).__glbLoaded = ((window as any).__glbLoaded || 0) + 1
   }, [object, onReady])
 
   useFrame((_, dt) => mixer.current?.update(Math.min(dt, 0.1) * speed))

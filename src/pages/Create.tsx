@@ -6,7 +6,7 @@ import { liveAvailable, startGeneration, waitForTask } from '../lib/api'
 import { sfx } from '../lib/sfx'
 import { MuteButton, hashQuery } from './common'
 
-type Draft = { label: string; note: string }
+type Draft = { label: string; note: string; lib?: string }
 type Phase = 'form' | 'building' | 'done'
 
 const IDEAS = [
@@ -24,14 +24,27 @@ const IDEAS = [
   'a little sailboat',
 ]
 
+/** Pre-made Tripo models: instant, and they don't spend live-generation credits. */
+const SHELF: { lib: string; label: string; emoji: string }[] = [
+  { lib: 'coffee', label: 'A very large coffee', emoji: '☕' },
+  { lib: 'cake', label: 'A birthday cake', emoji: '🎂' },
+  { lib: 'cat', label: 'A tiny cat', emoji: '🐈' },
+  { lib: 'teddy', label: 'A teddy bear', emoji: '🧸' },
+  { lib: 'books', label: 'A pile of books', emoji: '📚' },
+  { lib: 'rocket', label: 'A toy rocket', emoji: '🚀' },
+  { lib: 'telescope', label: 'A telescope', emoji: '🔭' },
+  { lib: 'trophy', label: 'A tiny trophy', emoji: '🏆' },
+  { lib: 'pillow', label: 'A nap pillow', emoji: '😴' },
+]
+
 const SURPRISE: { to: string; from: string; theme: ThemeId; items: Draft[]; msg: string } = {
   to: 'Sam',
   from: 'Alex',
   theme: 'onsen',
   items: [
-    { label: 'a strawberry shortcake', note: 'For every birthday I missed.' },
-    { label: 'a red bicycle', note: 'Remember the summer we rode everywhere?' },
-    { label: 'a tiny guitar', note: 'Play me that song again.' },
+    { label: 'a little red bicycle', note: 'Remember the summer we rode everywhere?' },
+    { label: 'A birthday cake', note: 'For every birthday I missed.', lib: 'cake' },
+    { label: 'A tiny cat', note: 'Mochi says hi.', lib: 'cat' },
   ],
   msg: "Moving across the world was the bravest thing you've ever done. Here's a little place to rest when it feels like too much. The capybaras are holding your spot.",
 }
@@ -67,9 +80,9 @@ export function Create() {
 
   const previewGift: Gift = useMemo(() => {
     const its: GiftItem[] =
-      phase === 'form' ? filled.map((d) => ({ label: d.label.trim(), lib: 'mystery' })) : items
+      phase === 'form' ? filled.map((d) => ({ label: d.label.trim(), lib: d.lib ?? 'mystery', walk: d.lib === 'cat' })) : items
     return { v: 1, to: to || 'you', from: from || 'a friend', msg, theme, items: its }
-  }, [phase, filled.map((d) => d.label).join('|'), items, theme, to, from, msg])
+  }, [phase, filled.map((d) => d.label + (d.lib ?? '')).join('|'), items, theme, to, from, msg])
 
   const setDraft = (i: number, patch: Partial<Draft>) => setDrafts((ds) => ds.map((d, j) => (j === i ? { ...d, ...patch } : d)))
 
@@ -80,6 +93,7 @@ export function Create() {
     if (!list.length) return
     sfx('chime')
     const draft: GiftItem[] = list.map((d) => ({ label: d.label.trim().slice(0, 60), note: d.note.trim().slice(0, 140) || undefined }))
+    const shelf = list.map((d) => d.lib)
     setItems(draft)
     setStates(draft.map(() => 'pending'))
     setProgress(draft.map(() => 0))
@@ -90,7 +104,7 @@ export function Create() {
     await Promise.all(
       draft.map(async (it, i) => {
         await sleep(300 + i * 450)
-        if (useLive) {
+        if (useLive && !shelf[i]) {
           try {
             patchAt(setStatus, i, 'Sculpting with Tripo…')
             const task = await startGeneration(it.label)
@@ -107,13 +121,14 @@ export function Create() {
             patchAt(setStatus, i, `${e?.message || 'Hmm'} — grabbing one from the shelf`)
           }
         }
-        const lib = matchLibrary(it.label)
+        const lib = shelf[i] ?? matchLibrary(it.label)
+        patchAt(setStatus, i, 'Fetching from the capy shelf…')
         for (let p = 0; p <= 100; p += 10) {
           patchAt(setProgress, i, p)
           await sleep(160)
         }
-        setItems((arr) => arr.map((x, j) => (j === i ? { ...x, lib } : x)))
-        patchAt(setStatus, i, lib === 'mystery' ? 'Wrapped as a surprise 🎀' : 'Picked from the capy shelf')
+        setItems((arr) => arr.map((x, j) => (j === i ? { ...x, lib, walk: lib === 'cat' } : x)))
+        patchAt(setStatus, i, lib === 'mystery' ? 'Wrapped as a surprise 🎀' : shelf[i] ? 'From the capy shelf (made with Tripo)' : 'Picked from the capy shelf')
         patchAt(setStates, i, 'ready')
       }),
     )
@@ -181,14 +196,31 @@ export function Create() {
                   value={d.label}
                   maxLength={60}
                   placeholder={IDEAS[(i * 4) % IDEAS.length]}
-                  onChange={(e) => setDraft(i, { label: e.target.value })}
+                  onChange={(e) => setDraft(i, { label: e.target.value, lib: undefined })}
                   data-testid={`item-${i}`}
                 />
                 <input className="note-in" value={d.note} maxLength={140} placeholder="a little note (optional)" onChange={(e) => setDraft(i, { note: e.target.value })} data-testid={`note-${i}`} />
               </div>
             ))}
             <div className="ideas">
-              {IDEAS.slice(0, 6).map((idea) => (
+              <span className="ideas-title">Capy shelf:</span>
+              {SHELF.map((sh) => (
+                <button
+                  key={sh.lib}
+                  className="chip shelf"
+                  data-testid={`shelf-${sh.lib}`}
+                  onClick={() => {
+                    const k = drafts.findIndex((d) => !d.label.trim())
+                    if (k >= 0) setDraft(k, { label: sh.label, lib: sh.lib })
+                  }}
+                >
+                  {sh.emoji} {sh.lib}
+                </button>
+              ))}
+            </div>
+            <div className="ideas">
+              <span className="ideas-title">Or type anything{live ? ' — Tripo sculpts it live' : ''}:</span>
+              {IDEAS.slice(0, 4).map((idea) => (
                 <button
                   key={idea}
                   className="chip"

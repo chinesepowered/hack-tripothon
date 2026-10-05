@@ -48,7 +48,8 @@ export async function waitForTask(task: string, onProgress: (p: number, status: 
     } catch (e) {
       if (++errors > 4) throw e
     }
-    await sleep(2500)
+    // capture mode steps a fake clock slowly, so poll more often there to keep the progress bar smooth
+    await sleep((window as any).__capture ? 400 : 2500)
   }
   throw new Error('generation timed out')
 }

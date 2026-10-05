@@ -16,7 +16,7 @@ export function App() {
     <Router hook={useHashPath}>
       <Switch>
         <Route path="/create" component={Create} />
-        <Route path="/g/:data">{(p) => <GiftView data={p.data} />}</Route>
+        <Route path="/g/:data">{(p) => <GiftView key={p.data} data={p.data} />}</Route>
         <Route path="/board/:id?">{(p) => <Board id={p.id} />}</Route>
         <Route component={Landing} />
       </Switch>

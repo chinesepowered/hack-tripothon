@@ -287,6 +287,13 @@ function Walkers({ theme }: { theme: ThemeId }) {
 
 function CameraRig({ mode, openAt, shift }: { mode: WorldMode; openAt: React.MutableRefObject<number | null>; shift?: [number, number] }) {
   const { camera, size } = useThree()
+  // capture/debug hook: project a world point to screen pixels (used to aim the scripted cursor)
+  useEffect(() => {
+    ;(window as any).__project = (x: number, y: number, z: number) => {
+      const v = new THREE.Vector3(x, y, z).project(camera)
+      return [((v.x + 1) / 2) * size.width, ((1 - v.y) / 2) * size.height]
+    }
+  }, [camera, size])
   useEffect(() => {
     const cam = camera as THREE.PerspectiveCamera
     if (shift && (shift[0] || shift[1])) {
@@ -301,8 +308,8 @@ function CameraRig({ mode, openAt, shift }: { mode: WorldMode; openAt: React.Mut
   const [explore, setExplore] = useState(mode !== 'gift')
   const fit = size.width / size.height < 0.8 ? 1.75 : size.width / size.height < 1.3 ? 1.25 : 1
   const target = useMemo(() => new THREE.Vector3(0.3, 0.35, 0.2), [])
-  const boxPos = useMemo(() => new THREE.Vector3(0, 3.1 * (fit > 1 ? 1.1 : 1), 7.6 * fit), [fit])
-  const boxLook = useMemo(() => new THREE.Vector3(0, 1.35, 0), [])
+  const boxPos = useMemo(() => new THREE.Vector3(0, 3.4 * (fit > 1 ? 1.1 : 1), 10.2 * fit), [fit])
+  const boxLook = useMemo(() => new THREE.Vector3(0, 1.05, 0), [])
   const widePos = useMemo(() => new THREE.Vector3(0.9, 6.4, 13.8).multiplyScalar(fit), [fit])
   const look = useMemo(() => new THREE.Vector3(), [])
 

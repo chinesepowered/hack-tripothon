@@ -1,0 +1,44 @@
+[
+  {
+    "id": "intro",
+    "text": "This is Capy Post. Tell it who a gift is for, and three things they love. A crew of capybaras builds them a tiny world, wraps it up, and delivers it as a link.",
+    "file": "capture/audio/n-0-intro.mp3",
+    "duration": 11.180408
+  },
+  {
+    "id": "form",
+    "text": "Let's make one for Sam, who just moved across the world. A cozy onsen. From the capy shelf, a birthday cake and a tiny cat. And something brand new, typed in: a little red bicycle with a basket.",
+    "file": "capture/audio/n-1-form.mp3",
+    "duration": 13.322449
+  },
+  {
+    "id": "build",
+    "text": "Anything you type gets sculpted from scratch by Tripo's text to 3D. That part is sped up here; it takes a couple of minutes. Meanwhile, the crew hauls crates onto the island. The cat was auto-rigged by Tripo as a four-legged animal, which is why it actually walks.",
+    "file": "capture/audio/n-2-build.mp3",
+    "duration": 16.953469
+  },
+  {
+    "id": "wrap",
+    "text": "Wrap it up, and you get a link. No app, no login, nothing to install.",
+    "file": "capture/audio/n-3-wrap.mp3",
+    "duration": 7.000816
+  },
+  {
+    "id": "unwrap",
+    "text": "Here's what Sam sees. A present, waiting. Tap it... the ribbon unties, the box falls open, and a whole world grows out of it.",
+    "file": "capture/audio/n-4-unwrap.mp3",
+    "duration": 10.213878
+  },
+  {
+    "id": "letter",
+    "text": "The host capybara is a Tripo model too, rigged as a biped, so it can wave hello while your letter unfolds. Then Sam can wander around, poke the capybaras soaking in the hot spring, and tap each gift to read its note.",
+    "file": "capture/audio/n-5-letter.mp3",
+    "duration": 15.281633
+  },
+  {
+    "id": "outro",
+    "text": "There are worlds for the moon's dark side, and for the kid you used to be. Every character and object you've seen was generated, rigged, and animated with Tripo. Capy Post. Send someone a tiny world.",
+    "file": "capture/audio/n-6-outro.mp3",
+    "duration": 12.669388
+  }
+]

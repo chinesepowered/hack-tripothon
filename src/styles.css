@@ -188,6 +188,7 @@ p {
 
 /* ---------- Landing ---------- */
 .landing .hero {
+  z-index: 40;
   position: absolute;
   left: max(24px, 4vw);
   top: 50%;
@@ -216,6 +217,7 @@ p {
 }
 
 .mute {
+  z-index: 40;
   position: absolute;
   right: 16px;
   top: 16px;
@@ -231,8 +233,9 @@ p {
 
 /* ---------- Gift view ---------- */
 .banner {
+  z-index: 40;
   position: absolute;
-  top: 7%;
+  top: 4%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -273,6 +276,7 @@ p {
 
 .letter-wrap {
   position: absolute;
+  z-index: 60;
   inset: 0;
   display: grid;
   place-items: center;
@@ -333,6 +337,7 @@ p {
 }
 
 .note {
+  z-index: 40;
   position: absolute;
   left: 50%;
   bottom: 96px;
@@ -356,6 +361,7 @@ p {
 }
 
 .dock {
+  z-index: 40;
   position: absolute;
   left: 50%;
   bottom: 18px;
@@ -370,6 +376,7 @@ p {
   white-space: nowrap;
 }
 .tip {
+  z-index: 40;
   position: absolute;
   top: 18px;
   left: 50%;
@@ -415,6 +422,7 @@ p {
   left: min(460px, 42vw);
 }
 .create .panel {
+  z-index: 40;
   position: absolute;
   left: 16px;
   top: 16px;
@@ -528,6 +536,19 @@ textarea {
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 2px;
+}
+.ideas-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  align-self: center;
+  margin-right: 2px;
+}
+.ideas + .ideas {
+  margin-top: 8px;
+}
+.chip.shelf {
+  background: #fff7dc;
 }
 .ideas .chip {
   font-size: 12px;

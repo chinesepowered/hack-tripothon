@@ -9,3 +9,4 @@ capture/out
 capture/frames
 *.log
 .DS_Store
+.api-build
