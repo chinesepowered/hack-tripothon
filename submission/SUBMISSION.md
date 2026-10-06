@@ -3,8 +3,8 @@
 ## Name
 Capy Post
 
-## One-liner
-Send someone a tiny world: capybaras build a 3D pocket world around the things they love, wrap it in a gift box, and deliver it as a link.
+## Tagline (<100 chars)
+Send someone a tiny 3D world: capybaras build it from things they love, wrap it, and deliver it. (96 chars)
 
 ## Tracks
 - **Direction track:** App (web, AI-native product)
