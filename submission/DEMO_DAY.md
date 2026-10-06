@@ -9,6 +9,7 @@
   1. Landing page: https://hack-tripothon.vercel.app
   2. **Backup gift** (has a live-generated Tripo trophy, so there's no waiting): [demo gift link](https://hack-tripothon.vercel.app/#/g/N4IgbiBcCMA0IBcD2VEAsCmACAIhgtkrgIYCeWAVgK4AmA5hgM4jwBmATkvqgplgMLEADuQAKSRgiwBjdhgDuLEPkZ1UAFTTEAdgGtGWVknZZJSIUICW2ulgBGpAIRYAomAzty04aTvF2xFg6NFh0lqxSmHJY8sQG+MQ02PKWvFjq7JZCSAB06Xx0SAA2SdoyPn4BWAicQmjksQaM0lRFQggYIUWW7oac+FhI2tiMGNod2tIYeerEutiBjEhz9hhG0aRIVCbDAB5SSYQ5SrwEGKhDo9pKqQTMkADaoEXEdhhFqACCocWl5SKVQI1cz1JTaJAdVAAZRabQ6XR62Ac6Uy2T6XEGw1MYwmU2O8AQcV0qAALAB2ADMFOgADYKQBOAC0rAwACYyYySQBWVkkxn09kc1g0aA0EmdEmsEkADnOAF9YM9Xu8vlh3J4sC92AwZEhWCzzvBwZDICA8IQsDQyIYqO98SBunZUNI9QaQAqlW8PqbvghrF5iAgwRDzj6qMhGZk6AwQsiMlkkLBTERUkFpAgqMQikUGln9PbHc7A0pYkViZAara5QBdOVAA)
   3. Create page: https://hack-tripothon.vercel.app/#/create
+- **Morning of Oct 8, make a fresh backup gift:** Tripo's stored outputs may expire, and if the trophy can't load it shows as a mystery box. On the Create tab, type one thing (for example "a golden trophy shaped like a capybara"), add two shelf items, build, wrap, and bookmark the link it gives you. Use that as tab 2.
 - Check that https://hack-tripothon.vercel.app/api/health says `"live":true`.
 - Put the printed QR card on the table (`submission/demo-qr-card.png`), or show it on your phone.
 - Keep `submission/capy-post-walkthrough.mp4` downloaded in case everything else fails.
