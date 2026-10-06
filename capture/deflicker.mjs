@@ -2,7 +2,9 @@
 // Software-GL captures occasionally grab a frame before the WebGL canvas is composited,
 // leaving the flat page background. Detect those (no sky gradient between the top and
 // bottom of the right edge) and replace each with the previous good frame.
-// Usage: SHARP=/path/to/node_modules/sharp node capture/deflicker.mjs <framesDir>
+// Usage: SHARP=/path/to/node_modules/sharp node capture/deflicker.mjs <framesDir> [altTakeDir ...]
+// Captures are deterministic, so a second take of the same shot has identical good frames:
+// a blank frame is first replaced by the same frame from an alternate take, if that one is good.
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { createRequire } from 'node:module'
@@ -10,6 +12,7 @@ import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
 const sharp = require(process.env.SHARP || 'sharp')
 const dir = process.argv[2]
+const alts = process.argv.slice(3)
 const out = path.join(dir, 'fixed')
 await fs.rm(out, { recursive: true, force: true })
 await fs.mkdir(out)
@@ -50,7 +53,23 @@ async function isBlank(file) {
   return false
 }
 const blank = []
-for (const f of files) blank.push(await isBlank(path.join(dir, f)))
+const source = files.map(() => dir)
+let fromAlt = 0
+for (const [i, f] of files.entries()) {
+  let bad = await isBlank(path.join(dir, f))
+  for (const alt of alts) {
+    if (!bad) break
+    try {
+      if (!(await isBlank(path.join(alt, f)))) {
+        source[i] = alt
+        bad = false
+        fromAlt++
+      }
+    } catch {}
+  }
+  blank.push(bad)
+}
+if (alts.length) console.log(`${fromAlt} blank frames taken from alternate takes`)
 // pass 2: good frames are hard-linked; blank frames become a blend of their nearest good
 // neighbours (keeps motion smooth), or a copy of the previous good frame for long gaps
 let replaced = 0
@@ -58,7 +77,7 @@ const list = []
 for (let i = 0; i < files.length; i++) {
   const dst = path.join(out, files[i])
   if (!blank[i]) {
-    await fs.link(path.join(dir, files[i]), dst)
+    await fs.link(path.join(source[i], files[i]), dst)
     continue
   }
   let p = i - 1
@@ -68,11 +87,11 @@ for (let i = 0; i < files.length; i++) {
   replaced++
   list.push(files[i])
   if (p < 0 && n >= files.length) await fs.link(path.join(dir, files[i]), dst)
-  else if (p < 0) await fs.link(path.join(dir, files[n]), dst)
-  else if (n >= files.length || n - p > 6) await fs.link(path.join(dir, files[p]), dst)
+  else if (p < 0) await fs.link(path.join(source[n], files[n]), dst)
+  else if (n >= files.length || n - p > 6) await fs.link(path.join(source[p], files[p]), dst)
   else {
     const w = (i - p) / (n - p)
-    const [pa, pb] = await Promise.all([sharp(path.join(dir, files[p])).raw().toBuffer({ resolveWithObject: true }), sharp(path.join(dir, files[n])).raw().toBuffer()])
+    const [pa, pb] = await Promise.all([sharp(path.join(source[p], files[p])).raw().toBuffer({ resolveWithObject: true }), sharp(path.join(source[n], files[n])).raw().toBuffer()])
     const mix = Buffer.alloc(pa.data.length)
     for (let k = 0; k < mix.length; k++) mix[k] = Math.round(pa.data[k] * (1 - w) + pb[k] * w)
     await sharp(mix, { raw: { width: pa.info.width, height: pa.info.height, channels: pa.info.channels } }).jpeg({ quality: 92 }).toFile(dst)

@@ -8,6 +8,7 @@ Every capybara and every gift object is generated with **Tripo** (text-to-3D). T
 
 - **Live demo:** https://hack-tripothon.vercel.app/ (opens straight to a gift addressed to you, no login)
 - **Walkthrough video (1:39, narrated):** https://www.youtube.com/watch?v=L6b9ko6AgjI · [`mp4`](submission/capy-post-walkthrough.mp4)
+- **Demo-day stage video (2:42, captions burned in):** [`submission/capy-post-demo-day.mp4`](submission/capy-post-demo-day.mp4)
 - **Visual asset board (turnarounds + worlds):** [`submission/asset-board.png`](submission/asset-board.png)
 - **9:16 social clip:** [`submission/clip-unwrap-vertical.mp4`](submission/clip-unwrap-vertical.mp4)
 - **Submission copy, posts, demo-day pitch:** [`submission/`](submission/) (start with [`CHECKLIST.md`](submission/CHECKLIST.md))
@@ -77,4 +78,11 @@ npm run build && npx esbuild api/*.ts --bundle --platform=node --format=esm --ou
 TRIPO_API_KEY=... node capture/serve.mjs 4173 &                                 # frozen build + api
 BASE=http://localhost:4173 node capture/record.mjs                              # frames
 node capture/assemble.mjs                                                       # → submission/*.mp4
+# demo-day stage video
+ELEVENLABS_API_KEY=... node scripts/generate-stage-audio.mjs                   # narration (with timestamps) + music
+node capture/stage/slides/render.mjs                                            # slides → png
+SHARP=... BASE=http://localhost:4173 node capture/stage-shots.mjs               # stage footage (SHARP re-takes blank grabs)
+SHARP=... node capture/deflicker.mjs capture/out/stage/<shot> [take-b dir]     # per shot; a second take fills stubborn blanks
+node capture/stage/slides/link-patch.mjs && SHARP=... node capture/stage/link-fix.mjs  # production URL in the share-link field
+node capture/stage-edit.mjs                                                     # → submission/capy-post-demo-day.mp4
 ```

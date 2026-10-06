@@ -128,6 +128,7 @@ const B2 = seq('walk', 40, 40 + fr(6.4))
 say('idea', 'Tell it', 'world.', t0(B2) + 0.25)
 
 // 3–5. BUILD → SEND → OPEN: one continuous take of Sam's gift, recorded to this narration
+// (the share link in these frames reads the production URL: capture/stage/link-fix.mjs)
 const C = seq('sam', 0, Math.min(sam.frames, fr(M.letter + 10.6)))
 const S = t0(C)
 say('build', "Let's", 'gift.', S + 0.5)
@@ -369,9 +370,14 @@ function render(c, i) {
   for (const [n, o] of (c.overlays || []).entries()) {
     const idx = inputs.filter((x) => x === '-i').length
     inputs.push('-loop', '1', '-framerate', String(FPS), '-t', D.toFixed(3), '-i', o.png)
-    let ov = `[${idx}:v]format=rgba${o.in > 0 ? `,fade=t=in:st=${o.in}:d=0.35:alpha=1` : ''}`
-    if (o.out !== undefined) ov += `,fade=t=out:st=${o.out}:d=0.35:alpha=1`
-    chain.push(`${ov}[o${n}]`, `${base}[o${n}]overlay=0:0:format=auto,format=yuv420p[b${n + 1}]`)
+    if (o.from !== undefined) {
+      // hard-switched patch at a position, for clip times [from, until)
+      chain.push(`[${idx}:v]format=rgba[o${n}]`, `${base}[o${n}]overlay=${o.x}:${o.y}:format=auto:enable='between(t,${(o.from - 0.001).toFixed(3)},${(o.until - 0.002).toFixed(3)})',format=yuv420p[b${n + 1}]`)
+    } else {
+      let ov = `[${idx}:v]format=rgba${o.in > 0 ? `,fade=t=in:st=${o.in}:d=0.35:alpha=1` : ''}`
+      if (o.out !== undefined) ov += `,fade=t=out:st=${o.out}:d=0.35:alpha=1`
+      chain.push(`${ov}[o${n}]`, `${base}[o${n}]overlay=0:0:format=auto,format=yuv420p[b${n + 1}]`)
+    }
     base = `[b${n + 1}]`
   }
   ff([...inputs, '-filter_complex', chain.join(';'), '-map', base, '-frames:v', String(c.frames), ...ENC, out])
@@ -416,13 +422,16 @@ const voiceWav = mixTrack('voice', voice, (v) => {
 const sfxItems = sfx.filter((e) => e.t >= 0 && e.t < D - 0.05 && fs.existsSync(rel(`public/audio/sfx-${e.name}.mp3`))).map((e) => ({ ...e, file: `public/audio/sfx-${e.name}.mp3`, at: e.t }))
 const sfxWav = mixTrack('sfx', sfxItems, (e) => `aresample=44100,volume=${e.vol ?? (e.name === 'pop' ? 0.5 : 0.65)}`)
 const music = rel('capture/stage/audio/music-stage.mp3')
+// start the track late so its own ending (≈188s in) lands on the last frame; that also puts the
+// track's quiet breakdown under Sam's unwrap and letter
+const musicStart = Math.max(0, 188 - D)
 const premix = path.join(AUD, 'premix.wav')
 const mix = path.join(AUD, 'mix.wav')
 ff([
   '-i', voiceWav, '-i', music, '-i', sfxWav,
   '-filter_complex',
-  `[1:a]aresample=44100,volume=${process.env.MUSIC_VOL || 0.34},atrim=0:${D.toFixed(3)},afade=t=out:st=${(D - 4).toFixed(2)}:d=4[m];` +
-    `[0:a]asplit=2[v][sc];[m][sc]sidechaincompress=threshold=0.03:ratio=7:attack=30:release=450[duck];` +
+  `[1:a]aresample=44100,atrim=start=${musicStart.toFixed(3)},asetpts=PTS-STARTPTS,volume=${process.env.MUSIC_VOL || 0.24},atrim=0:${D.toFixed(3)},afade=t=in:d=0.3,afade=t=out:st=${(D - 1.5).toFixed(2)}:d=1.5[m];` +
+    `[0:a]asplit=2[v][sc];[m][sc]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=500[duck];` +
     `[v]volume=1.3[vv];[vv][duck][2:a]amix=inputs=3:normalize=0:dropout_transition=0[a]`,
   '-map', '[a]', '-t', D.toFixed(3), '-c:a', 'pcm_s16le', premix,
 ])

@@ -14,6 +14,7 @@ let sharp = null
 try {
   sharp = createRequire(import.meta.url)(process.env.SHARP || 'sharp')
 } catch {}
+const MAX_TRIES = Number(process.env.RETAKES || 6)
 const PAGE_BG = [
   [247, 198, 183],
   [216, 172, 157],
@@ -171,17 +172,17 @@ export async function createCapture({ width = 1920, height = 1080, fps = 30, out
       // let the compositor present the freshly drawn WebGL frame before grabbing it
       await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
       let buf
-      for (let attempt = 0; attempt < 6; attempt++) {
+      for (let attempt = 0; attempt < MAX_TRIES; attempt++) {
         const { data } = await cdp.send('Page.captureScreenshot', { format: 'jpeg', quality: 92 })
         buf = Buffer.from(data, 'base64')
         if (!(await looksBlank(buf))) break
         retakes++
         // wait for another presentation; from the third try, redraw the same instant first
-        await page.evaluate(async (redraw) => {
+        await page.evaluate(async ([redraw, wait]) => {
           if (redraw) window.__r3fAdvance?.(window.__vnow / 1000)
           await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
-          await window.__realSleep(40)
-        }, attempt >= 2)
+          await window.__realSleep(wait)
+        }, [attempt >= 2, Math.min(40 * 2 ** attempt, 640)])
       }
       await fs.writeFile(`${outDir}/f${String(frameNo).padStart(5, '0')}.jpg`, buf)
       frameNo++

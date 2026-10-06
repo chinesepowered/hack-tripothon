@@ -1,6 +1,6 @@
 # SF Demo Day (Oct 8): how to demo Capy Post
 
-**Site:** https://hack-tripothon.vercel.app · **Repo:** https://github.com/chinesepowered/hack-tripothon · **Video:** https://www.youtube.com/watch?v=L6b9ko6AgjI
+**Site:** https://hack-tripothon.vercel.app · **Repo:** https://github.com/chinesepowered/hack-tripothon · **Video:** https://www.youtube.com/watch?v=L6b9ko6AgjI · **Stage video:** `submission/capy-post-demo-day.mp4`
 
 ## Before doors open (10 min)
 - Laptop on power, **Chrome**, hardware acceleration on (Settings → System). Close heavy apps and turn off notifications.
@@ -12,7 +12,7 @@
 - **Morning of Oct 8, make a fresh backup gift:** Tripo's stored outputs may expire, and if the trophy can't load it shows as a mystery box. On the Create tab, type one thing (for example "a golden trophy shaped like a capybara"), add two shelf items, build, wrap, and bookmark the link it gives you. Use that as tab 2.
 - Check that https://hack-tripothon.vercel.app/api/health says `"live":true`.
 - Put the printed QR card on the table (`submission/demo-qr-card.png`), or show it on your phone.
-- Keep `submission/capy-post-walkthrough.mp4` downloaded in case everything else fails.
+- Keep `submission/capy-post-demo-day.mp4` (stage video) and `submission/capy-post-walkthrough.mp4` downloaded in case everything else fails.
 
 ## The 3-minute table demo
 1. **Hook (10s):** "When someone you love is far away, a text feels small. Capy Post lets you send them a *world*."
@@ -27,8 +27,32 @@
 
 **Between judges:** reload the backup gift tab (Cmd/Ctrl+R) to re-wrap the box. On the Create tab, click **Make another**.
 
-## If you get a stage slot (60–90s)
-Same story, compressed: hook, unwrap the backup gift on the projector, one line on the Tripo pipeline, show the moon and kid worlds ("Peek inside" chips on the landing page), then close. Don't wait on a live generation on stage; use the backup gift.
+## On stage: the 3-minute video
+**File:** `submission/capy-post-demo-day.mp4` (2:42, 1080p, narration, music and sound effects, with captions burned in). Download it to the laptop and play the file full screen with sound on. Don't stream it over venue Wi-Fi.
+
+**Run of show:** you do a 10–20s high-energy intro, then press play. That's about 3:00 in total.
+
+| Time | On screen |
+|---|---|
+| 0:00 | Cold open: Mom unwraps the tiny world her kid built her |
+| 0:11 | The idea, then the title card |
+| 0:23 | Building Sam's gift: the form, then Tripo sculpts a bicycle live (sped up and labelled) while the capybaras haul crates |
+| 0:50 | Wrap it up and get a link |
+| 0:58 | Sam opens it: unwrap, letter, poke the capybaras |
+| 1:15 | Send one back |
+| 1:21 | Works on any phone; the gift lives in the link |
+| 1:30 | Made with Tripo: the pipeline, the asset board, the rigged cat and capybara, the biped host |
+| 1:53 | The moon and kid worlds |
+| 2:02 | What's next |
+| 2:16 | Close, then the QR card stays up for about 20s so people can scan it |
+
+**Short on time?** The video is front-loaded. Stopping at 1:21 (after "Send one back") still tells the whole story; stopping at 1:53 adds the Tripo pipeline.
+
+**Intro lines, if you want them** (press play on the last word):
+- "Raise your hand if someone you love lives far away. … Yeah. A text feels tiny. So we built them a whole world. This is Capy Post!"
+- "What if a birthday message were a tiny 3D island, built by capybaras, that you get to unwrap? Watch this."
+
+**No video playback?** Tell the same story live, compressed: the hook, unwrap the backup gift on the projector, one line on the Tripo pipeline, the moon and kid worlds ("Peek inside" chips on the landing page), then the close. Don't wait on a live generation on stage; use the backup gift.
 
 ## If something breaks
 - **Venue Wi-Fi is bad:** switch to your phone hotspot.

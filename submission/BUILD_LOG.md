@@ -45,3 +45,4 @@ Then build one for someone you miss. @TripoAI #Tripothon
 - **Hour 3:** Floating island, onsen water shader, steam, petals, and a gift box whose walls fold open like petals.
 - **Hour 4:** Live generation: anything typed is sculpted by Tripo text-to-3D. Worker capybaras carry crates while it runs. GLBs stream through our own route because Tripo's CDN has no CORS headers.
 - **Hour 5:** ElevenLabs for music, sound effects and narration. A deterministic capture rig records the real app frame by frame for the walkthrough.
+- **Demo-day prep:** a 2:42 stage cut. Same capture rig, new shots paced to sentence-level ElevenLabs timestamps, with captions generated from the same alignment data.
