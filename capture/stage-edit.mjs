@@ -384,35 +384,43 @@ function render(c, i) {
   return out
 }
 
-console.log('rendering clips…')
-const files = clips.map((c, i) => {
-  const f = render(c, i)
-  process.stdout.write(`  ${path.basename(f)} ${sec(c.frames).toFixed(2)}s\n`)
-  return f
-})
-const list = path.join(TMP, 'clips.txt')
-fs.writeFileSync(list, files.map((f) => `file '${f}'`).join('\n') + '\n')
 const video = path.join(TMP, 'video.mp4')
-ff(['-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', video])
+if (process.env.REUSE_VIDEO && fs.existsSync(video)) console.log('reusing the rendered picture (REUSE_VIDEO)')
+else renderVideo()
+function renderVideo() {
+  console.log('rendering clips…')
+  const files = clips.map((c, i) => {
+    const f = render(c, i)
+    process.stdout.write(`  ${path.basename(f)} ${sec(c.frames).toFixed(2)}s\n`)
+    return f
+  })
+  const list = path.join(TMP, 'clips.txt')
+  fs.writeFileSync(list, files.map((f) => `file '${f}'`).join('\n') + '\n')
+  ff(['-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', video])
+}
 
 
 // ---------- audio ----------
 const AUD = path.join(TMP, 'audio')
 fs.mkdirSync(AUD, { recursive: true })
+const durationOf = (f) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString().trim())
 function mixTrack(name, items, build) {
-  // items → one wav, chunked so filter graphs stay small
+  // items → one wav, chunked so filter graphs stay small. Every chunk is mixed onto a silent bed
+  // that spans the whole video: without it, a chunk whose first item starts late (the closing
+  // lines) loses its leading silence and lands at 0:00.
   const parts = []
   for (let k = 0; k < items.length; k += 30) {
     const chunk = items.slice(k, k + 30)
-    const inputs = chunk.flatMap((it) => ['-i', rel(it.file)])
-    const lines = chunk.map((it, n) => `[${n}:a]${build(it)},adelay=${Math.round(it.at * 1000)}:all=1[s${n}]`)
+    const inputs = ['-f', 'lavfi', '-t', D.toFixed(3), '-i', 'anullsrc=r=44100:cl=stereo', ...chunk.flatMap((it) => ['-i', rel(it.file)])]
+    const lines = chunk.map((it, n) => `[${n + 1}:a]${build(it)},adelay=${Math.round(it.at * 1000)}:all=1[s${n}]`)
     const f = path.join(AUD, `${name}-${k / 30}.wav`)
-    ff([...inputs, '-filter_complex', `${lines.join(';')};${chunk.map((_, n) => `[s${n}]`).join('')}amix=inputs=${chunk.length}:normalize=0:dropout_transition=0,apad,atrim=0:${D.toFixed(3)}[out]`, '-map', '[out]', '-ac', '2', '-ar', '44100', f])
+    ff([...inputs, '-filter_complex', `${lines.join(';')};[0:a]${chunk.map((_, n) => `[s${n}]`).join('')}amix=inputs=${chunk.length + 1}:normalize=0:dropout_transition=0:duration=first[out]`, '-map', '[out]', '-ac', '2', '-ar', '44100', f])
     parts.push(f)
   }
   const f = path.join(AUD, `${name}.wav`)
   if (parts.length === 1) fs.copyFileSync(parts[0], f)
-  else ff([...parts.flatMap((p) => ['-i', p]), '-filter_complex', `amix=inputs=${parts.length}:normalize=0:dropout_transition=0[out]`, '-map', '[out]', f])
+  else ff([...parts.flatMap((p) => ['-i', p]), '-filter_complex', `amix=inputs=${parts.length}:normalize=0:dropout_transition=0:duration=first[out]`, '-map', '[out]', f])
+  for (const p of [...parts, f]) if (Math.abs(durationOf(p) - D) > 0.05) throw new Error(`${path.basename(p)} is ${durationOf(p)}s, expected ${D.toFixed(2)}s`)
   return f
 }
 const voiceWav = mixTrack('voice', voice, (v) => {
