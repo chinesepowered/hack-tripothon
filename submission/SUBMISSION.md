@@ -16,6 +16,11 @@ Send someone a tiny world: capybaras build a 3D pocket world around the things t
 - Visual asset board: `submission/asset-board.png`
 - Repo: https://github.com/chinesepowered/hack-tripothon
 
+## A gift for ___ (≤60 chars)
+**anyone you miss — starting with you, dear judge** (47 chars)
+
+Alternatives: "someone far away you can't hug today" (36) · "the people we miss, delivered by capybaras" (42)
+
 ## Theme: "Build a world as a Gift"
 Capy Post takes the theme literally. You build a world *for one specific person*: their world, their three favourite things, and your letter, delivered in a box they unwrap. The three world styles come straight from the theme's taglines: a cozy capybara onsen, **the moon's dark side**, and **the kid you used to be**.
 
