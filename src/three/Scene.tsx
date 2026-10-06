@@ -10,7 +10,7 @@ export const CAPTURE = params.has('capture')
 const MSAA = CAPTURE ? Number(params.get('msaa') ?? 0) : 4
 
 /** Capture mode: the recorder drives rendering with explicit timestamps (seconds). */
-function CaptureDriver() {
+export function CaptureDriver() {
   const advance = useThree((s) => s.advance)
   useEffect(() => {
     ;(window as any).__r3fAdvance = (t: number) => advance(t, true)

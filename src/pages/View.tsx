@@ -7,10 +7,11 @@ import { SAMPLE_GIFTS } from '../lib/gift'
 export function View({ index }: { index: number }) {
   const openAt = useRef<number | null>(null)
   const gift = SAMPLE_GIFTS[index] ?? SAMPLE_GIFTS[0]
+  const params = new URLSearchParams(location.search)
   return (
     <div className="page">
       <Scene>
-        <World gift={gift} mode="ambient" openAt={openAt} showLabels={new URLSearchParams(location.search).has('labels')} />
+        <World gift={gift} mode="ambient" openAt={openAt} showLabels={params.has('labels')} spin={Number(params.get('spin')) || undefined} />
       </Scene>
     </div>
   )

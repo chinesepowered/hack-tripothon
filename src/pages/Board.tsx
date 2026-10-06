@@ -4,6 +4,7 @@ import { PerspectiveCamera, Environment, Lightformer, ContactShadows } from '@re
 import * as THREE from 'three'
 import { GLBModel } from '../three/GLBModel'
 import { useAsset, useManifestReady, allAssets } from '../lib/assets'
+import { CAPTURE, CaptureDriver } from '../three/Scene'
 
 const CHARACTERS: [string, string][] = [
   ['host', 'Host capybara · biped auto-rig · 5 batched presets (greet, dance, walk, relax, cheer)'],
@@ -49,7 +50,8 @@ function Single({ id }: { id: string }) {
   const ready = useManifestReady()
   return (
     <div className="board-single">
-      <Canvas flat dpr={1} gl={{ preserveDrawingBuffer: true, antialias: true }}>
+      <Canvas flat dpr={1} frameloop={CAPTURE ? 'never' : 'always'} gl={{ preserveDrawingBuffer: true, antialias: true }}>
+        {CAPTURE && <CaptureDriver />}
         <Suspense fallback={null}>{ready && <Turntable id={id} angle={angle} />}</Suspense>
       </Canvas>
     </div>

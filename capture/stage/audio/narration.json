@@ -1,0 +1,79 @@
+[
+  {
+    "id": "cold",
+    "text": "Somewhere right now, someone is opening a tiny world. The ribbon unties, the box falls open, and an entire island grows out of it. Made just for them.",
+    "file": "capture/stage/audio/00-cold.mp3",
+    "align": "capture/stage/audio/00-cold.json",
+    "duration": 10.710204
+  },
+  {
+    "id": "idea",
+    "text": "When someone you love is far away, a text feels small. So we built Capy Post. Tell it who a gift is for and three things they love, and a crew of capybaras builds them a world.",
+    "file": "capture/stage/audio/01-idea.mp3",
+    "align": "capture/stage/audio/01-idea.json",
+    "duration": 11.885714
+  },
+  {
+    "id": "build",
+    "text": "Let's make one for Sam, who just moved across the world. Pick a world. Grab a birthday cake and a tiny cat from the capy shelf. Then type anything, like a little red bicycle with a basket. Tripo sculpts it from scratch, live. We sped that part up. While it works, the capybaras haul crates onto the island, so even the waiting is part of the gift. And there it is!",
+    "file": "capture/stage/audio/02-build.mp3",
+    "align": "capture/stage/audio/02-build.json",
+    "duration": 26.096327
+  },
+  {
+    "id": "send",
+    "text": "Wrap it up, and you get a link. No app, no account, nothing to install. Just send it.",
+    "file": "capture/stage/audio/03-send.mp3",
+    "align": "capture/stage/audio/03-send.json",
+    "duration": 6.713469
+  },
+  {
+    "id": "open",
+    "text": "Sam gets a present. One tap, and the world unfolds, with a letter from Alex. Then Sam can wander around, poke the capybaras soaking in the hot spring, and tap each gift to read its note.",
+    "file": "capture/stage/audio/04-open.mp3",
+    "align": "capture/stage/audio/04-open.json",
+    "duration": 13.035102
+  },
+  {
+    "id": "loop",
+    "text": "And every gift ends with one button. Send one back.",
+    "file": "capture/stage/audio/05-loop.mp3",
+    "align": "capture/stage/audio/05-loop.json",
+    "duration": 4.362449
+  },
+  {
+    "id": "phone",
+    "text": "It works on any phone, with nothing to download. And the whole gift lives inside the link, so there's no account and no database.",
+    "file": "capture/stage/audio/06-phone.mp3",
+    "align": "capture/stage/audio/06-phone.json",
+    "duration": 7.941224
+  },
+  {
+    "id": "tripo",
+    "text": "Every capybara and every gift here was made with Tripo. One shared style prompt keeps the whole cast looking like a single toy set. Tripo auto-rigged the cat and this capybara as four-legged animals, so they really walk. Our very first capybara came out as an upright plush, and Tripo's rig check called it a biped. So it became our host, and we taught it to dance.",
+    "file": "capture/stage/audio/07-tripo.mp3",
+    "align": "capture/stage/audio/07-tripo.json",
+    "duration": 23.170612
+  },
+  {
+    "id": "worlds",
+    "text": "There are worlds for the moon's dark side, and for the kid you used to be.",
+    "file": "capture/stage/audio/08-worlds.mp3",
+    "align": "capture/stage/audio/08-worlds.json",
+    "duration": 3.94449
+  },
+  {
+    "id": "next",
+    "text": "It's made for birthdays, long-distance friends, and the holidays. Sending is free. Next up: snap a photo of your pet, and it walks around the island. And 3D-printed keepsakes of your world.",
+    "file": "capture/stage/audio/09-next.mp3",
+    "align": "capture/stage/audio/09-next.json",
+    "duration": 13.688163
+  },
+  {
+    "id": "close",
+    "text": "Every gift is a share, and everyone who opens one is a single tap from sending one back. Capy Post. Send someone a tiny world. Scan the code, and unwrap your own!",
+    "file": "capture/stage/audio/10-close.mp3",
+    "align": "capture/stage/audio/10-close.json",
+    "duration": 10.893061
+  }
+]

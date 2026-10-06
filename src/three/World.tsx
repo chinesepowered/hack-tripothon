@@ -45,6 +45,8 @@ type Props = {
   showLabels?: boolean
   /** Shift the framing (fraction of viewport) to make room for UI: [x on wide screens, y on portrait]. */
   shift?: [number, number]
+  /** Idle auto-rotation speed of the explore camera. */
+  spin?: number
 }
 
 const LOOP_A: [number, number][] = [
@@ -285,7 +287,7 @@ function Walkers({ theme }: { theme: ThemeId }) {
   )
 }
 
-function CameraRig({ mode, openAt, shift }: { mode: WorldMode; openAt: React.MutableRefObject<number | null>; shift?: [number, number] }) {
+function CameraRig({ mode, openAt, shift, spin = 0.35 }: { mode: WorldMode; openAt: React.MutableRefObject<number | null>; shift?: [number, number]; spin?: number }) {
   const { camera, size } = useThree()
   // capture/debug hook: project a world point to screen pixels (used to aim the scripted cursor)
   useEffect(() => {
@@ -354,13 +356,13 @@ function CameraRig({ mode, openAt, shift }: { mode: WorldMode; openAt: React.Mut
       maxDistance={26 * fit}
       maxPolarAngle={1.36}
       autoRotate
-      autoRotateSpeed={0.35}
+      autoRotateSpeed={spin}
       enableDamping
     />
   ) : null
 }
 
-export function World({ gift, mode, openAt, onOpen, onLetter, itemStates, onItemTap, showLabels = true, shift }: Props) {
+export function World({ gift, mode, openAt, onOpen, onLetter, itemStates, onItemTap, showLabels = true, shift, spin }: Props) {
   const theme = gift.theme
   const island = useRef<THREE.Group>(null!)
   const propsAt = useRef<number | null>(null)
@@ -446,7 +448,7 @@ export function World({ gift, mode, openAt, onOpen, onLetter, itemStates, onItem
       </group>
       {mode === 'gift' && <GiftBox openAt={openAt} onTap={open} />}
       {mode === 'gift' && burst && <Sparkles count={80} scale={[9, 5, 9]} position={[0, 2.2, 0]} size={6} speed={0.8} color="#fff1b0" />}
-      <CameraRig mode={mode} openAt={openAt} shift={shift} />
+      <CameraRig mode={mode} openAt={openAt} shift={shift} spin={spin} />
     </>
   )
 }

@@ -5,6 +5,44 @@
 // exactly 1/FPS seconds and takes a CDP screenshot, so rendering speed doesn't matter.
 import { chromium } from 'playwright'
 import fs from 'node:fs/promises'
+import { createRequire } from 'node:module'
+
+// Software GL occasionally hands back a screenshot taken before the WebGL canvas was composited
+// (the flat page background shows through). With sharp available (SHARP=/path/to/sharp), such
+// frames are detected and re-taken at the same virtual time; capture/deflicker.mjs stays as a net.
+let sharp = null
+try {
+  sharp = createRequire(import.meta.url)(process.env.SHARP || 'sharp')
+} catch {}
+const PAGE_BG = [
+  [247, 198, 183],
+  [216, 172, 157],
+]
+async function looksBlank(buf) {
+  if (!sharp) return false
+  const GW = 96
+  const GH = 54
+  const data = await sharp(buf).resize(GW, GH, { fit: 'fill' }).removeAlpha().raw().toBuffer()
+  for (let ty = 0; ty < 6; ty++) {
+    for (let tx = 0; tx < 12; tx++) {
+      const sum = [0, 0, 0]
+      const sq = [0, 0, 0]
+      for (let y = ty * 9; y < ty * 9 + 9; y++) {
+        for (let x = tx * 8; x < tx * 8 + 8; x++) {
+          const i = (y * GW + x) * 3
+          for (let c = 0; c < 3; c++) {
+            sum[c] += data[i + c]
+            sq[c] += data[i + c] * data[i + c]
+          }
+        }
+      }
+      const mean = sum.map((v) => v / 72)
+      const std = Math.max(...sq.map((v, c) => Math.sqrt(Math.max(0, v / 72 - mean[c] * mean[c]))))
+      if (std < 1.6 && PAGE_BG.some((b) => Math.abs(b[0] - mean[0]) + Math.abs(b[1] - mean[1]) + Math.abs(b[2] - mean[2]) < 12)) return true
+    }
+  }
+  return false
+}
 
 const CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="34" height="40" viewBox="0 0 34 40"><path d="M4 3 L4 31 L11.5 24.5 L16.5 36 L22 33.5 L17 22.5 L27 22 Z" fill="#fffaf4" stroke="#4a3426" stroke-width="2.6" stroke-linejoin="round"/></svg>`
 
@@ -109,6 +147,7 @@ export async function createCapture({ width = 1920, height = 1080, fps = 30, out
   await page.addInitScript(initScript, { svg: CURSOR_SVG })
 
   let frameNo = 0
+  let retakes = 0
   const cursor = { x: width / 2, y: height * 0.62, pressed: false, ringAt: -999, hidden: false }
   const msPerFrame = 1000 / fps
 
@@ -131,10 +170,22 @@ export async function createCapture({ width = 1920, height = 1080, fps = 30, out
       await tick(step)
       // let the compositor present the freshly drawn WebGL frame before grabbing it
       await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
-      const { data } = await cdp.send('Page.captureScreenshot', { format: 'jpeg', quality: 92 })
-      await fs.writeFile(`${outDir}/f${String(frameNo).padStart(5, '0')}.jpg`, Buffer.from(data, 'base64'))
+      let buf
+      for (let attempt = 0; attempt < 6; attempt++) {
+        const { data } = await cdp.send('Page.captureScreenshot', { format: 'jpeg', quality: 92 })
+        buf = Buffer.from(data, 'base64')
+        if (!(await looksBlank(buf))) break
+        retakes++
+        // wait for another presentation; from the third try, redraw the same instant first
+        await page.evaluate(async (redraw) => {
+          if (redraw) window.__r3fAdvance?.(window.__vnow / 1000)
+          await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+          await window.__realSleep(40)
+        }, attempt >= 2)
+      }
+      await fs.writeFile(`${outDir}/f${String(frameNo).padStart(5, '0')}.jpg`, buf)
       frameNo++
-      if (frameNo % 150 === 0) console.log(`  frame ${frameNo} (${(frameNo / fps).toFixed(1)}s)`)
+      if (frameNo % 150 === 0) console.log(`  frame ${frameNo} (${(frameNo / fps).toFixed(1)}s)${retakes ? `, ${retakes} blank grabs re-taken` : ''}`)
     }
   }
 

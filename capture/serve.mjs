@@ -6,7 +6,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
-const DIST = path.join(ROOT, 'dist')
+const DIST = path.join(ROOT, process.env.DIST || 'dist')
 const API = path.join(ROOT, '.api-build')
 const port = Number(process.argv[2] || 4173)
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.glb': 'model/gltf-binary', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp3': 'audio/mpeg', '.woff2': 'font/woff2', '.webp': 'image/webp' }

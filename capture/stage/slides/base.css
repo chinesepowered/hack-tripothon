@@ -1,0 +1,6 @@
+@font-face{font-family:Fredoka;src:url(file:///home/user/hack-tripothon/public/fonts/fredoka-11adc6.woff2) format('woff2');font-weight:300 700}
+@font-face{font-family:Nunito;src:url(file:///home/user/hack-tripothon/public/fonts/nunito-798ec6.woff2) format('woff2');font-weight:200 900}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;font-family:Nunito,sans-serif;color:#4a3426}
+.bg{position:absolute;inset:0;background:radial-gradient(1400px 800px at 20% 0%,#ffe3d6,transparent),linear-gradient(180deg,#fbd6d6 0%,#f2c6dc 50%,#d9c6ee 100%)}
+.brand{font:600 34px Fredoka;display:flex;gap:14px;align-items:center}
+.stamp{width:54px;height:54px;border-radius:15px;background:#ffd45c;display:grid;place-items:center;font-size:30px}
