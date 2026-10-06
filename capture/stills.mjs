@@ -68,10 +68,16 @@ await page.goto(`${process.env.BASE || 'http://localhost:4173'}/?capture=1#/g/${
 await settle(60000, () => (window.__glbLoaded || 0) >= 9 && document.fonts.status === 'loaded')
 await settle(1500)
 await frame(30)
-await still('01-gift-box')
+if (process.env.ONLY !== 'unwrap') await still('01-gift-box')
 await page.mouse.click(W / 2, H * 0.55)
-await frame(Math.round(30 * 2.9))
+await frame(Math.round(30 * 1.35))
 await still('02-unwrap')
+if (process.env.ONLY === 'unwrap') {
+  await cap.browser.close()
+  process.exit(0)
+}
+await frame(Math.round(30 * 1.55))
+await still('02b-island-rises')
 await frame(Math.round(30 * 1.25))
 await still('03-world-grows')
 await frame(Math.round(30 * 4.8))
