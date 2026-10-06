@@ -1,4 +1,4 @@
-import { tripo, fail, TASK_RE, HttpError } from './_lib/tripo'
+import { tripo, fail, TASK_RE, HttpError } from './_lib/tripo.js'
 
 export async function GET(req: Request) {
   try {

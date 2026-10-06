@@ -11,8 +11,8 @@ Send someone a tiny world: capybaras build a 3D pocket world around the things t
 - **Tool track:** Tripo
 
 ## Links
-- Playable demo: **<YOUR VERCEL URL>** (lands on a gift addressed to the judge, no login)
-- Walkthrough video: `submission/capy-post-walkthrough.mp4` (1:39, narrated; upload to YouTube/X and paste the link). It's a real screen recording of the app, with one live Tripo generation (sped up and labelled).
+- Playable demo: **https://hack-tripothon.vercel.app/** (click "Open the gift for you": a gift addressed to the judge, no login)
+- Walkthrough video: **https://www.youtube.com/watch?v=L6b9ko6AgjI** (1:39, narrated). It's a real screen recording of the app, with one live Tripo generation (sped up and labelled). File: `submission/capy-post-walkthrough.mp4`
 - Visual asset board: `submission/asset-board.png`
 - Repo: https://github.com/chinesepowered/hack-tripothon
 

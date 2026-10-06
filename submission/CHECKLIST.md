@@ -1,6 +1,7 @@
 # Morning checklist (≈15 min). Deadline: Oct 5 AoE = Tue Oct 6, 11:59 UTC (7:59am ET)
 
-1. **Deploy (5 min)**
+1. ✅ **Deployed:** https://hack-tripothon.vercel.app/ · ✅ **Video:** https://www.youtube.com/watch?v=L6b9ko6AgjI
+   - (Original steps, for reference.)
    - On GitHub, merge `claude/zealous-shannon-hnndoy` into `main`.
    - [vercel.com/new](https://vercel.com/new) → import `chinesepowered/hack-tripothon` → add env var `TRIPO_API_KEY` → Deploy.
    - Open `https://<your-app>.vercel.app/api/health` and check it says `"live":true`.

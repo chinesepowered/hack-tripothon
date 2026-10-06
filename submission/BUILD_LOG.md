@@ -32,7 +32,7 @@ Waiting on AI, but make it cute. @TripoAI #Tripothon
 ### Post 4: invite people to try it (attach a screenshot of the letter)
 Made a tiny world for whoever opens this link. There's a hot spring, a yuzu, and a capybara with a letter for you ♨️🍊
 
-<YOUR DEMO URL>
+https://hack-tripothon.vercel.app/
 
 Then build one for someone you miss. @TripoAI #Tripothon
 

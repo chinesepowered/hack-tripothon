@@ -1,4 +1,4 @@
-import { tripo, fail, TASK_RE, HttpError } from './_lib/tripo'
+import { tripo, fail, TASK_RE, HttpError } from './_lib/tripo.js'
 
 // Streams a generated GLB through our origin (Tripo's CDN sends no CORS headers)
 // and lets the edge cache keep it, so gift links keep working after Tripo's

@@ -1,4 +1,4 @@
-import { tripo, json, fail, rateLimit, STYLE, NEG, HttpError } from './_lib/tripo'
+import { tripo, json, fail, rateLimit, STYLE, NEG, HttpError } from './_lib/tripo.js'
 
 export async function POST(req: Request) {
   try {

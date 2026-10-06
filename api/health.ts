@@ -1,4 +1,4 @@
-import { key, tripo, json } from './_lib/tripo'
+import { key, tripo, json } from './_lib/tripo.js'
 
 let cache: { at: number; balance: number } | null = null
 
