@@ -689,20 +689,28 @@ textarea {
 
 .og-title {
   position: absolute;
-  left: 56px;
+  left: clamp(56px, 4.5vw, 96px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 40;
 }
 .og-title h1 {
-  font-size: 64px;
+  font-size: clamp(64px, 5.2vw, 112px);
   margin: 14px 0 10px;
   text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
 }
 .og-title p {
-  font-size: 22px;
+  font-size: clamp(22px, 1.7vw, 34px);
   font-weight: 700;
   color: var(--ink-soft);
+}
+.og-title .brand {
+  font-size: clamp(18px, 1.4vw, 28px);
+}
+.og-title .stamp {
+  width: clamp(30px, 2.3vw, 46px);
+  height: clamp(30px, 2.3vw, 46px);
+  font-size: clamp(16px, 1.2vw, 24px);
 }
 
 /* ---------- motion ---------- */
