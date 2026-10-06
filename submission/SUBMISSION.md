@@ -48,3 +48,23 @@ Capy Post turns "I was thinking of you" into a tiny 3D world. Tell it who a gift
 
 ## Team
 <names / handles>
+
+## Awards & declarations (paste-ready)
+
+### How Tripo contributed (485/500)
+Tripo is the core engine. Every capybara and gift is Tripo text-to-3D with one shared style prompt, and anything a sender types is generated live in the app while worker capybaras haul crates, so the wait becomes part of the gift. We chained rig-check → auto-rig → retarget: quadruped walk cycles for a capybara and a cat, and a 5-preset biped performance for the host (rig-check called our plush capybara a biped, so it became the host). GLBs stream via our API so gift links persist.
+
+### Third-party assets disclosure (840/1000)
+AI tools: Tripo API (all character and gift 3D models, auto-rigging, animation retargeting, live text-to-3D in the app). ElevenLabs (narration voice, background music and sound effects, Creator plan). Claude Code (AI coding assistant used to write the app, capture pipeline and docs).
+Fonts: Fredoka, Nunito and Caveat from Google Fonts (SIL Open Font License), self-hosted.
+Open-source libraries: React, three.js, React Three Fiber, drei, @react-three/postprocessing, Vite, lz-string (MIT); postprocessing (Zlib); wouter (Unlicense).
+Production tools: Playwright and FFmpeg (walkthrough capture and edit), glTF-Transform and sharp (texture compression), ImageMagick (stills). Hosted on Vercel.
+Original work: the island, props, gift box, sky and water shaders are procedural code written during the event. No stock models, images or audio.
+
+(Leave "No third-party assets requiring attribution were used" **unchecked**.)
+
+### Prior work declaration (320/1000)
+Check **"This project was started from scratch during the event"**. If text is still required:
+
+Started from scratch during the event. The repo was created empty on Oct 5, 2026 (UTC) and all code, Tripo-generated models, ElevenLabs audio, the walkthrough video and the stills were made between Oct 5 and Oct 6. Nothing existed before: no prior code, assets or prototype. The repo's commit history shows the timeline.
+
