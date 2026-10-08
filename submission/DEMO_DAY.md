@@ -7,16 +7,16 @@
 - **Sound on**: the music and capybara squeaks sell it. A small speaker helps in a loud room.
 - Open these tabs in order:
   1. Landing page: https://hack-tripothon.vercel.app
-  2. **Backup gift** (has a live-generated Tripo trophy, so there's no waiting): [demo gift link](https://hack-tripothon.vercel.app/#/g/N4IgbiBcCMA0IBcD2VEAsCmACAIhgtkrgIYCeWAVgK4AmA5hgM4jwBmATkvqgplgMLEADuQAKSRgiwBjdhgDuLEPkZ1UAFTTEAdgGtGWVknZZJSIUICW2ulgBGpAIRYAomAzty04aTvF2xFg6NFh0lqxSmHJY8sQG+MQ02PKWvFjq7JZCSAB06Xx0SAA2SdoyPn4BWAicQmjksQaM0lRFQggYIUWW7oac+FhI2tiMGNod2tIYeerEutiBjEhz9hhG0aRIVCbDAB5SSYQ5SrwEGKhDo9pKqQTMkADaoEXEdhhFqACCocWl5SKVQI1cz1JTaJAdVAAZRabQ6XR62Ac6Uy2T6XEGw1MYwmU2O8AQcV0qAALAB2ADMFOgADYKQBOAC0rAwACYyYySQBWVkkxn09kc1g0aA0EmdEmsEkADnOAF9YM9Xu8vlh3J4sC92AwZEhWCzzvBwZDICA8IQsDQyIYqO98SBunZUNI9QaQAqlW8PqbvghrF5iAgwRDzj6qMhGZk6AwQsiMlkkLBTERUkFpAgqMQikUGln9PbHc7A0pYkViZAara5QBdOVAA)
+  2. **Backup gift** (has a live-generated Tripo trophy, so there's no waiting): [demo gift link](https://hack-tripothon.vercel.app/#/g/N4IgbiBcCMA0IBcD2VEAsCmACAIhgtkrgIYCeWAVgK4AmA5hgM4jwBmATkvqgplgMLEADuQAKSRgiwBjdhgDuLEPkZ1UAFTTEAdgGtGWVknZZJSIUICW2ulgBGpAIRYAomAzty04aTvF2xFg6NFh0lqxSmHJY8sQG+MQ02PKWvFjq7JZCSAB06Xx0SAA2SdoyPn4BWAicQmjksQaM0lRFQggYIUWW7oac+FhI2tiMGNod2tIYeerEutiBjEhz9hhG0aRIVCbDAB5SSYQ5SrwEGKhDo9pKqQTMkADaoEXEdhhFqACCocWl5SKVQI1cz1JTaJAdVAAZRabQ6XR62Ac6Uy2T6XEGw1MYwmU2O8AQcV0qAArDQAAw0ADsJL8AFo7AAOaAAZjpABY7AA2Rl0gCcLJJ0jpNFYND5dnJrCp0BJ0C5IAAvrBnq93l8sO5PFgXuwGDIkKxWBhzvBwZDICA8IQsDQyIYqO98SBunZUNJDcbzsrVW8PpbvghrF5iAgwRDzgGqMg6Zk6AwQsiMlkkLBTERUkFpAgqMQikUGnn9M7Xe7Q0pYkViZAao7FQBdRVAA) (made and tested on the morning of Oct 8; [older spare](https://hack-tripothon.vercel.app/#/g/N4IgbiBcCMA0IBcD2VEAsCmACAIhgtkrgIYCeWAVgK4AmA5hgM4jwBmATkvqgplgMLEADuQAKSRgiwBjdhgDuLEPkZ1UAFTTEAdgGtGWVknZZJSIUICW2ulgBGpAIRYAomAzty04aTvF2xFg6NFh0lqxSmHJY8sQG+MQ02PKWvFjq7JZCSAB06Xx0SAA2SdoyPn4BWAicQmjksQaM0lRFQggYIUWW7oac+FhI2tiMGNod2tIYeerEutiBjEhz9hhG0aRIVCbDAB5SSYQ5SrwEGKhDo9pKqQTMkADaoEXEdhhFqACCocWl5SKVQI1cz1JTaJAdVAAZRabQ6XR62Ac6Uy2T6XEGw1MYwmU2O8AQcV0qAALAB2ADMFOgADYKQBOAC0rAwACYyYySQBWVkkxn09kc1g0aA0EmdEmsEkADnOAF9YM9Xu8vlh3J4sC92AwZEhWCzzvBwZDICA8IQsDQyIYqO98SBunZUNI9QaQAqlW8PqbvghrF5iAgwRDzj6qMhGZk6AwQsiMlkkLBTERUkFpAgqMQikUGln9PbHc7A0pYkViZAara5QBdOVAA) also still works)
   3. Create page: https://hack-tripothon.vercel.app/#/create
-- **Morning of Oct 8, make a fresh backup gift:** Tripo's stored outputs may expire, and if the trophy can't load it shows as a mystery box. On the Create tab, type one thing (for example "a golden trophy shaped like a capybara"), add two shelf items, build, wrap, and bookmark the link it gives you. Use that as tab 2.
+- **Backup gift refreshed on the morning of Oct 8:** the link above was generated live that morning and checked in a browser (box, unwrap, letter, trophy). If a trophy ever shows as a mystery box instead, make a new one: on the Create tab, type one thing (for example "a golden trophy shaped like a capybara"), add two shelf items, build, wrap, and bookmark the link.
 - Check that https://hack-tripothon.vercel.app/api/health says `"live":true`.
 - Put the printed QR card on the table (`submission/demo-qr-card.png`), or show it on your phone.
 - Keep `submission/capy-post-demo-day.mp4` (stage video) and `submission/capy-post-walkthrough.mp4` downloaded in case everything else fails.
 
 ## The 3-minute table demo
 1. **Hook (10s):** "When someone you love is far away, a text feels small. Capy Post lets you send them a *world*."
-2. **Make it theirs (20s):** on the Create tab, ask the judge: *"What's something you love?"* Type it as one of the three things, put their name in "For", pick two shelf items, and click **Have the capybaras build it**. Tripo starts sculpting their thing live (about 1.5–2 min).
+2. **Make it theirs (20s):** on the Create tab, ask the judge: *"What's something you love?"* Type it as one of the three things, put their name in "For", pick two shelf items, and click **Have the capybaras build it**. Tripo starts sculpting their thing live (about 2–3 min; on the morning of Oct 8 it took 2.5 min, sitting at 99% for the last minute).
 3. **Let them unwrap (60s):** while Tripo works, switch to the backup gift tab and **hand them the laptop**: "This one's for you, tap the box." The box opens, the island grows, the letter types out. Get them to poke a soaking capybara and tap a gift label to read its note.
 4. **The Tripo story (40s), pointing at the screen:**
    - "Every capybara and gift is Tripo text-to-3D with one style prompt."
@@ -63,7 +63,7 @@
 
 ## Likely questions
 - **What did Tripo make vs. you?** Tripo made every capybara and gift model, all the rigging and animation, and the live generations. We built the procedural island, the gift box and unwrap, the app, and the gift-link system.
-- **How long does generation take?** About 1.5–2 minutes for text-to-3D with fast texturing; then it streams into the scene.
+- **How long does generation take?** About 2–3 minutes for text-to-3D with fast texturing; then it streams into the scene.
 - **How do gifts persist without accounts?** The whole gift is compressed into the link. Live models are fetched by Tripo task id through our API and cached at the edge.
 - **What's next?** A photo of your pet becomes a 3D pet that walks around the island (image-to-3D plus quadruped rig), voice notes in the letter, and visiting a world together.
 - **Business?** Free to send. Paid: premium worlds, pets, and 3D-printed keepsakes via Tripo's STL/3MF export.
